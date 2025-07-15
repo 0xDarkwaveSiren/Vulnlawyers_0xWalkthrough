@@ -4,9 +4,7 @@ VulnLawyers - CTF Walkthrough
 
 This repository contains a full walkthrough of the VulnLawyers CTF, solved using only:
 
-ffuf (directory fuzzing)
-
-gobuster (directory and vhost enumeration)
+ffuf (directory and subdomain fuzzing)
 
 Caido (web proxy analysis)
 
@@ -17,8 +15,6 @@ All screenshots and proof-of-work are stored in the /screenshots directory.
 🔧 Tools Used
 
 ffuf – Fast web fuzzer
-
-gobuster – Directory and vhost brute-forcer
 
 Caido – Web proxy for intercepting and manipulating requests
 
@@ -42,7 +38,7 @@ ffuf -w subdomains.txt -u https://[target-ip]/FUZZ
     /images
     /login
 
-🌐 3. Subdomain Discovery with ffuf
+🌐 3. Subdomain Discovery with ffuf (Main Domain)
 
 ffuf -w subdomains.txt -u https://[target-ip]/ -H "Host: FUZZ.[target-ip]"
 
@@ -144,9 +140,6 @@ Gained access as Shayne Cairns (Case Manger - Admin)
 Flag # 1
 
   Path: https://[target-ip]/users
-
-______________________________________
-
 
 Flag # 2
 
