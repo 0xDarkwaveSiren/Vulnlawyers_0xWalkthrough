@@ -4,9 +4,9 @@ VulnLawyers - CTF Walkthrough
 
   This repository contains a full walkthrough of the VulnLawyers CTF, solved using only:
 
-    ffuf (directory and subdomain fuzzing)
+  ffuf (directory and subdomain fuzzing)
 
-    Caido (web proxy analysis)
+  Caido (web proxy analysis)
 
   The methodology follows a clean, repeatable pentest format with all flags captured and documented.
 
