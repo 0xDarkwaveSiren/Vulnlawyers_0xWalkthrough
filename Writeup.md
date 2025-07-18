@@ -3,7 +3,6 @@ VulnLawyers - CTF Walkthrough
 📁 Repository Overview
 
   This repository contains a full walkthrough of the VulnLawyers CTF, solved using only:
-  https://github.com/0xDarkwaveSiren/Vulnlawyers_0xWalkthrough/blob/main/Screenshots/access-as-manager.png
 
     ffuf (directory and subdomain fuzzing)
 
