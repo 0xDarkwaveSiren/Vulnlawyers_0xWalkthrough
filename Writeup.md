@@ -50,6 +50,8 @@ VulnLawyers - CTF Walkthrough
 
     data
 
+  ![Alt_text](https://github.com/0xDarkwaveSiren/Vulnlawyers_0xWalkthrough/blob/main/Screenshots/ffuf2.png?raw=true)
+
 📂 4. Directory Fuzzing with ffuf (Subdomain: data)
 
   _ffuf -w subdomains.txt -u https://data.sufrin.ctfi/FUZZ_
