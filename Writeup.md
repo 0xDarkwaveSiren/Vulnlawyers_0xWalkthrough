@@ -96,7 +96,7 @@ VulnLawyers - CTF Walkthrough
 
     email=admin&password=admin
 
-🛠️ 6. Login Access with Caido
+🔑 6. Login Access with Caido
 
   Automated Matrix Payloads with Caido
 
@@ -119,7 +119,7 @@ Intercepted GET _/lawyers-only-profile-details/4_ (attempted change of credentia
     "password": "_____________"
     }
 
-🧍 8. Privilege Escalation 
+🔓 8. Privilege Escalation 
 
   Replayed request with Caido
 
