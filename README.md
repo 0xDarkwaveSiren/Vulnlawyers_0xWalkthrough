@@ -595,12 +595,6 @@ Found this walkthrough helpful? Have questions or alternative solutions?
 
 ---
 
-## 📜 License
-
-This writeup is shared under MIT License for educational purposes.
-
----
-
 **"Understanding how things break makes you better at building them secure."** 🔱
 
 *This walkthrough demonstrates that effective penetration testing isn't about the quantity of tools, but the quality of analysis. Two tools, careful methodology, and understanding of web application logic were sufficient for complete system compromise.*
